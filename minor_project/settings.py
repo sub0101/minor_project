@@ -108,11 +108,11 @@ WSGI_APPLICATION = 'minor_project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'minorproject',
-        'USER': 'projectuser',
-        'PASSWORD': 'suraj0101',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'NAME': 'railway',
+        'USER': 'postgres',
+        'PASSWORD': 'LSbLFkRwnwavnZNBDQWGXnEyqrwhGGju',
+        'HOST': 'roundhouse.proxy.rlwy.net',
+        'PORT': '57706',
     }
 }
 
