@@ -1,0 +1,56 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+.card-img-overlay{
+    margin-top: 6.8%;
+}
+.card-img-overlay h2{
+    font-family: cursive;
+}
+
+.card-img-overlay p{
+    font-size: 1.4rem;
+    font-family: cursive;
+}
+
+.address h5{
+        font-size: 3rem;
+        margin: 250px 0px 0px 50px;
+        font-family: cursive;
+}
+.address p{
+    font-family: cursive;
+    font-size: 1.7rem;
+    margin: 10px 0px 50px 50px;
+}
+
+
+
+
+
+.contact{
+    /* width: 25%; */
+    margin-top: 10px;
+    /* margin-left: 950px; */
+    background-color: white;
+    box-shadow: yellowgreen;
+    box-shadow: hotpink;
+    
+}
+
+.card-header{
+    text-align: center;
+    font-size: 1.5rem;
+    font-style: oblique;
+    font-family: cursive;
+    background-color:gray;
+    color: honeydew;  
+    box-shadow: hotpink;
+
+}
+
+.addcard{
+    width:50%
+}
