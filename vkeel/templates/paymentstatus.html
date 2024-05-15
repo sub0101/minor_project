@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block body %}
+{% load static %}
+{% block css_advice %}
+
+{% endblock css_advice %}
+
+<body class="text-danger">
+  
+  {% if response.RESPCODE == '01' %}
+  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+  Transacation Successfully ...!
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  {% else %}
+  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+    Transacation Failed..!
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  {% endif %}
+ 
+  <div class="container bg-secondary">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Transaction.Id</th>
+          <th scope="col">Bank Name</th>
+          <th scope="col">Ammount</th>
+          <th scope="col">Txn Date</th>
+          <th scope="col">Status</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">{{response.ORDERID}} </th>
+          <td>{{response.BANKNAME}} </td>
+          <td>{{response.TXNAMOUNT}} RS.</td>
+          <td>{{response.TXNDATE}}</td>
+          <td>{{response.STATUS}}</td>
+        </tr>
+        
+      </tbody>
+    </table>
+
+  </div>
+
+
+  <strong style="color: rgb(15, 117, 206);">Please Take Screen Shot Of Your Id Thanks!</strong>
+  
+
+
+
+</body>
+
+
+
+{% endblock body %}

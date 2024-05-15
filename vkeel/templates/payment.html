@@ -1,0 +1,23 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PAYTM merchant PAYMENT</title>
+</head>
+
+<body>
+    <h1>REDIRECTING TO PAYMENT PAGE</h1>
+    <h4>PLEASE DO NOT REFRESH YOUR PAGE</h4>
+    <form action="https://securegw-stage.paytm.in/order/process" method="post" name="paytm">
+        {% for key , value in param_dict.items  %}
+        
+        <input type="hidden" name="{{key}}" value="{{value}}">
+                {% endfor %}
+    </form>
+    <script>
+        document.paytm.submit();
+    </script>
+</body>
+
+</html>

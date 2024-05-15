@@ -1,0 +1,558 @@
+{% extends "base.html" %} {% load static %} {% block body %} {% block profilecss %}
+<link rel="stylesheet" href="{% static '/css/profile.css' %}">
+<title>Proffesional Profile</title>
+<style>
+    /* .back {
+        background: url("https://mdbootstrap.com/img/Photos/Others/img (42).jpg");
+        background-size: cover;
+        background-position: center;
+     
+        filter: blur(8px);
+        -webkit-filter: blur(8px);
+     
+        height: 100%;
+      
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    } */
+    
+    .text-file {
+        opacity: 0;
+        height: 20px;
+        position: absolute;
+        background: red;
+        cursor: pointer;
+        z-index: 99999;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+    }
+</style>
+
+{% endblock profilecss %}
+
+
+<!-- Body Tag -->
+
+{% comment %} modal {% endcomment %}
+<div class="modal fade" id="caseModal" tabindex="-1" role="dialog" aria-labelledby="caseModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action='' method="POST">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="college-name" class="col-form-label">Case Title</label> {{form3.case_title}}
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="course" class="col-form-label">Case Year</label>
+                                <!-- <textarea class="form-control" id="message-text"></textarea> -->
+                                {{form3.case_year}}
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="course" class="col-form-label">Case Law</label>
+                                <!-- <textarea class="form-control" id="message-text"></textarea> -->
+                                {{form3.case_law}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="college-name" class="col-form-label">Case Title</label> {{form3.case_description}}
+                            </div>
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="modal-footer">
+
+                <button type="submit" class="btn  btn-outline-primary">Add</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="educationModal" tabindex="-1" role="dialog" aria-labelledby="educationModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action='' method="POST">
+
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="college-name" class="col-form-label">College Name</label>
+                        <!-- <input type="text" class="form-control" id="recipient-name"> -->
+                        <div class="border border-info">
+                            {{form4.college_name}}
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+                        <label for="course" class="col-form-label">Course Name</label>
+                        <!-- <textarea class="form-control" id="message-text"></textarea> -->
+                        {{form4.course_name}}
+                    </div>
+
+            </div>
+            <div class="modal-footer">
+
+                <button type="submit" class="btn btn-primary btn-outline-primary">Add</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+{% comment %} code here {% endcomment %}
+
+<div class="container-fluid mt-5 ">
+    <form action="" method='POST' class='professional_form' enctype="multipart/form-data">
+
+        <div class="row ">
+
+            <div class="col-12  col-sm-12  col-lg-4 col-md-12  mt-4">
+                <div class="container overflow-hidden  p-0 ">
+                    <div class="row overflow-hidden">
+                        <div class="col-6 bg-white position-relative">
+                            <a href="/personal/{{user.id}}"> <img src="{% static '/images/personal.png' %}" class=" .img circular--square  position-relative mw-100 mh-100" alt=""></a>
+                            <h6 class="text-center  mt-1">Personal</h6>
+                        </div>
+
+                        <div class="col-6 bg-white position-relative">
+                            <a href="/edit_profile/{{user.id}}"> <img src="{% static '/images/professional.png' %}" class=" .img circular--square  position-relative mw-100 mh-100" alt=""> </a>
+                            <h6 class="text-center mt-1">Professional</h6>
+                        </div>
+
+
+                    </div>
+                </div>
+                <div class="container border mt-5 w-100 p-0 " style="height: 305px;">
+
+                    <center>
+                        <img class=" border bg-dark " src="{{user.image.url}}" alt="" style="border-radius: 50%; width: 200px; height: 200px;">
+                        <h4 class="mt-2"> {{user.name}}</h4>
+                    </center>
+
+
+                </div>
+
+
+
+            </div>
+
+
+
+            <!-- second col -->
+
+            <div class="col-12 col-sm-12 col-lg-8 col-md-12 mt-4  ">
+
+                <!-- Professional detail   -->
+
+                {% csrf_token %} {{form2.errors}} {{form3.errors}} {{form4.errors}}
+
+                <div class="row p-2">
+                    <div class="container-fluid  bg-white border border-info">
+                        <h4 class="font-weight-bold">Professional</h4>
+                        <p class=""> Update Your Professional Information</p>
+
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-6">
+
+                                <div class="row">
+                                    <div class=" col-sm-12 col-lg-4">
+                                        <label for="" class="mt-2">Language Spoken</label>
+
+                                    </div>
+                                    <div class="col-sm-12 col-lg-8">
+                                        <!-- <input type="text" class="w-100" value="{{user.name}}"> <br> -->
+                                        {{form2.language_spoken}}
+
+                                    </div>
+
+                                </div>
+                                <div class="row mt-5">
+                                    <div class="col-sm-12 col-lg-4">
+                                        <label for="" class=""> Practicing Since</label>
+
+                                    </div>
+                                    <div class="col-sm-12 col-lg-8">
+                                        {{form2.practicing_since}}
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+
+                            <div class="col-sm-12 col-md-6">
+
+                                <div class="row mt-3 ">
+                                    <div class="col-sm-12 col-lg-4">
+                                        <label for="" class=""> Enrollment No.</label>
+
+                                    </div>
+                                    <div class="col-sm-12 col-lg-8">
+
+                                        {{form2.enrollment_number}}
+
+                                    </div>
+
+                                </div>
+                                <!-- <div class="row mt-5 mb-5">
+                                    <div class="col-sm-12 col-lg-4">
+                                        <label for="" class=""> Mobile.</label>
+
+                                    </div>
+                                    <div class="col-sm-12 col-lg-8">
+
+                                        {{form1.mobile}}
+
+                                    </div>
+
+                                </div> -->
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <!-- Practice Area -->
+
+                <div class="row mt-5">
+
+                    <div class="container border border-info bg-white">
+                        <h4 class="font-weight-bold">Practice Areas/ Courts</h4>
+                        <p class="ml-2"> Update Details</p>
+
+                        <hr>
+                        <div class="row mt-5">
+                            <div class=" col-sm-12 col-lg-3">
+                                <label for="" class="mt-2"> Services Cities</label>
+
+                            </div>
+                            <div class="col-sm-12 col-lg-8">
+
+                                <select class="mw-100" name="add_cities" id="add_cities" style=" color: rgb(248, 3, 3); background-color: rgba(5, 5, 5, 0.349); border: 0; width: 100%; backface-visibility: hidden;">
+                                        
+                                    <option value="">--------------</option>
+                                 
+                                    {% for i in city  %}
+                                   
+                                    <option value= "{{i}}" > {{i}}</option>
+                                    {% endfor %}
+                                    <textarea class="mw-100" name="service_cities" id="id_service_cities" cols="80" rows="2" disabled ></textarea>
+                                </select>
+                                <p id="output">{% for i in user.profile.service_cities %} | {{i}} <button class='fas fa-minus bg-transparent border-0' value='{{i}},service_cities' name='delete' id='delete' onclick="this.form.submit()"></button> | {% endfor %} </p>
+                                <br>
+
+                            </div>
+
+                        </div>
+                        <div class="row mt-2 ">
+                            <div class=" col-sm-12 col-lg-3">
+                                <label for="" class="mt-2"> Area Of Law</label>
+
+                            </div>
+                            <div class="col-sm-12 col-lg-8">
+
+                                <select class="mw-100" name="add_law" id="add_law" .......... style=" color: rgb(248, 3, 3); background-color: rgba(5, 5, 5, 0.349); border: 0; width: 100%; backface-visibility: hidden;">
+                                        
+                                        <option value="">--------------</option>
+                                     
+                                        {% for i in laws  %}
+                                       
+                                        <option value= "{{i}}" > {{i}}</option>
+                                        {% endfor %}
+                                        <textarea class="mw-100" name="area_of_laww" id="id_area_of_law" cols="80" rows="2"  disabled></textarea>
+                                    </select>
+                                <p id="output">{% for i in user.profile.area_of_law %} | {{i}} <button class='fas fa-minus bg-transparent border-0' value='{{i}},area_of_law' name='delete' id='delete' onclick="this.form.submit()"></button> | {% endfor %} </p>
+                                <br>
+
+                            </div>
+
+                        </div>
+
+                        <div class="row  mb-5" style="margin-top: 100px; ">
+                            <div class=" col-sm-12 col-lg-3">
+                                <label for="" class="mt-2"> Visiting Courts</label>
+
+                            </div>
+                            <div class="col-sm-12 col-lg-8">
+                                <select class="mw-100" name="add_courts" id="add_courts" style=" color: rgb(248, 3, 3); background-color: rgba(5, 5, 5, 0.349); border: 0; width: 100%; backface-visibility: hidden;">
+                                        
+                                    <option value="">--------------</option>
+                                 
+                                    {% for i in courts  %}
+                                   
+                                    <option value= "{{i}}" > {{i}}</option>
+                                    {% endfor %}
+                                    <textarea class="mw-100" name="visiting_courts" id="id_visiting_courts" cols="80" rows="2" disabled ></textarea>
+                                </select>
+                                <p id="output">{% for i in user.profile.visiting_courts %} | {{i}} <button class='fas fa-minus bg-transparent border-0' value='{{i}},visiting_courts' name='delete' id='delete' onclick="this.form.submit()"></button> | {% endfor %} </p>
+                                <br>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <!-- Educational Detail -->
+
+                <div class="row mt-5  ">
+                    <div class="container border border-info bg-white con-course">
+                        <div class="row">
+                            <div class="col">
+                                <h4 class="font-weight-bold">Education Details</h4>
+                                <p class="ml-2"> Update Your Educations</p>
+                            </div>
+                            <div class="col">
+                                <p class="text-right mt-2 ">
+                                    <a class="btn btn-outline-success " data-toggle="modal" data-target="#educationModal" data-whatever="@mdo" style="right:0"> <i class="fas fa-plus text-info">
+                                        </i> Add Education</a>
+                                </p>
+                            </div>
+
+
+                        </div>
+
+                        <hr> {% for i in education_detail %}
+
+
+                        <div class="row  mt-5" id='course'>
+                            <div class=" col-10 col-sm-10 col-md-10 col-lg-5 mt-2">
+
+                                <div class="row">
+                                    <div class=" col-sm-12 col-lg-5 ">
+                                        <label for="" class="mt-2"> Course Name</label>
+
+                                    </div>
+                                    <div class="col-sm-12 col-lg-7 border">
+                                        {{i.course_name}}
+
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+
+                            <div class="col-sm-10 col-md-10 col-lg-5 col-10 mt-2">
+
+                                <div class="row  mb-5">
+                                    <div class="col-sm-12 col-lg-5">
+                                        <label for="" class=""> School/College </label>
+
+                                    </div>
+                                    <div class="col-sm-12 col-lg-7 border">
+                                        {{i.college_name}}
+
+
+                                    </div>
+
+
+                                </div>
+
+
+                            </div>
+
+
+                            <a href="/delete_education/{{i.id}}" style="margin-left:20px;"><i
+                                    class="material-icons mt-2">&#xe15c;</i></a>
+
+                        </div>
+                        {% endfor %}
+                    </div>
+
+                </div>
+
+
+                <!-- Winning Cases -->
+
+                <div class="row  mt-5">
+                    <div class="container  border border-info bg-white">
+                        <div class="row">
+                            <div class="col">
+                                <h5 class="font-weight-bold">Winning Cases</h5>
+                                <p class="ml-2"> Update Your Visiting Cases</p>
+                            </div>
+                            <div class="col">
+                                <p class="text-right mt-2 ">
+                                    <a class="btn  btn-outline-success " data-toggle="modal" data-target="#caseModal" data-whatever="@mdo" style="right:0"> <i class="fas fa-plus text-info">
+                                        </i> Add Case</a>
+                                </p>
+                            </div>
+
+
+                        </div>
+                        <hr> {% for i in case %}
+                        <div class="row mt-2 mb-2 border border-secondary">
+                            <div class="col mt-2 mb-3">
+
+                                <div class="row">
+                                    <div class=" col-sm-12 col-lg-2">
+                                        <label for="" class="mt-2"> Case Title</label>
+
+                                    </div>
+                                    <div class="col-sm-12 col-lg-7 border">
+                                        {{i.case_title}}
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="row mt-4">
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class=" col-sm-12 col-lg-3 ">
+                                                <label for="" class="mt-2"> Case Year</label>
+
+                                            </div>
+                                            <div class="col-sm-12 col-lg-8 border">
+                                                <div class="form-group">
+                                                    {{i.case_year}}
+
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class=" col-sm-12 col-lg-3">
+                                                <label for="" class="mt-2"> Case Law</label>
+
+                                            </div>
+                                            <div class="col-sm-12 col-lg-8 border">
+                                                <div class="form-group">
+
+                                                    {{i.case_law}}
+
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="row mt-4">
+                                    <div class=" col-sm-12 col-lg-2">
+                                        <label for="" class="mt-2"> Case Description</label>
+
+                                    </div>
+                                    <div class="col-sm-12 col-lg-7 border">
+
+                                        {{i.case_description}}
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="">
+
+                                <a href="/delete_case/{{i.id}}"><i
+                                        class="material-icons mt-5">&#xe15c;</i></a>
+                            </div>
+                        </div>
+
+                        {% endfor %}
+                    </div>
+
+                </div>
+
+                <!-- About  -->
+
+                <div class="row mt-5  mb-2">
+                    <div class="container border border-info bg-white">
+                        <div class="row">
+                            <div class="col">
+                                <h4 class="font-weight-bold">About</h4>
+                                <p class="ml-2"> Something About You</p>
+                            </div>
+
+
+
+                        </div>
+
+
+                        <hr>
+
+
+                        <div class="row   mb-2">
+
+                            <div class=" col-sm-12 col-lg-3">
+                                <h5 class="text-center mt-2"><label for=""> Bio</label></h5>
+
+                            </div>
+                            <div class="col-sm-12 col-lg-9">
+                                {{form2.bio}}
+                                <!-- <textarea name="" id="" cols="80" rows="7"></textarea> -->
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+
+                <center>
+                    <button id='submitBtn' class="btn btn-outline-info mb-2" type="submit"> Save</button>
+
+                </center>
+            </div>
+
+        </div>
+
+    </form>
+</div>
+
+
+</div>
+<!-- <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script> -->
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="{% static '/js/ajax_profession.js' %}"></script>
+
+{% endblock body %}

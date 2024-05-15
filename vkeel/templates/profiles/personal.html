@@ -1,0 +1,244 @@
+{% extends "base.html" %} {% block body %} {% load static %} {% block profilecss %}
+<link rel="stylesheet" href="{% static '/css/profile.css' %}">
+<title>Personal Profile</title>
+<style>
+    .text-file {
+        opacity: 0;
+        height: 20px;
+        position: absolute;
+        background: red;
+        cursor: pointer;
+        z-index: 99999;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+    }
+</style>
+
+{% endblock profilecss %}
+<div class="container-fluid mt-5 ">
+    <form action="" method="POST" enctype="multipart/form-data">
+        <div class="row">
+
+            <div class="col-12  col-sm-12  col-lg-4  mt-4 position-relative">
+                <div class="container overflow-hidden  p-0 ">
+                    <div class="row overflow-hidden">
+                        <div class="col-6 bg-white position-relative">
+                            <a href="/personal/{{user.id}}"> <img src="{% static '/images/personal.png' %}" class=" .img circular--square  position-relative mw-100 mh-100" alt=""></a>
+                            <h6 class="text-center  mt-1">Personal</h6>
+                        </div>
+
+                        <div class="col-6 bg-white position-relative">
+                            <a href="/edit_profile/{{user.id}}"> <img src="{% static '/images/professional.png' %}" class=" .img circular--square  position-relative mw-100 mh-100" alt=""> </a>
+                            <h6 class="text-center mt-1">Professional</h6>
+                        </div>
+
+
+                    </div>
+                </div>
+                <div class="container border mt-5 w-100 p-0 " style="height: 305px;">
+
+                    <center>
+                        <img class=" border bg-dark " src="{{user.image.url}}" id='image_upload' alt="" style="border-radius: 50%; width: 200px; height: 200px;">
+                        <h4 class="mt-2"> {{user.name}}</h4>
+                    </center>
+                    <div class="container bg-dark p-1">
+
+
+                        <center>
+                            {{form1.image}}
+                            <div class="d-inline-block border overflow-hidden" style="border-radius: 50%; width: 50px; height: 50px;">
+
+                                <center>
+                                    <i class="fas fa-plus text-info" style="margin-top: 15px;"> </i>
+                                </center>
+
+                            </div>
+                        </center>
+
+
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- second col -->
+
+            <div class="col-12 col-sm-12 col-lg-8 mt-4  p-2 mw-100 position-relative">
+                {{form1.errors}} {{form2.errors}} {% csrf_token %}
+                <div class="row position-relative">
+                    <div class="container bg-white border border-info position-relative">
+                        <h4 class="font-weight-bold">Personal</h4>
+                        <p class="ml-2"> Update Your Personal Information</p>
+
+                        <hr>
+                        <div class="row mb-5">
+                            <div class="col-sm-12 col-md-6 col-lg-6">
+
+                                <div class="row">
+                                    <div class=" col-sm-12 col-lg-4">
+                                        <label for="" class="mt-2"> Name</label>
+
+                                    </div>
+                                    <div class="col-sm-12 col-lg-8">
+                                        {{form1.name}}
+
+                                    </div>
+
+                                </div>
+                                <div class="row mt-5">
+                                    <div class="col-sm-12 col-lg-4">
+                                        <label for="" class=""> Dob</label>
+
+                                    </div>
+                                    <div class="col-sm-12 col-lg-8">
+
+                                        {{form2.dob}}
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+
+                            <div class="col-sm-12 col-md-6 col-lg-6">
+
+                                <div class="row mt-5 mb-5">
+                                    <div class="col-sm-12 col-lg-3">
+                                        <label for="" class=""> Gender</label>
+                                    </div>
+                                    <div class="col-sm-12 col-lg-6">
+                                        <div class="row">
+
+                                            <!-- <div class="col">
+                                            <input type="radio" name="radio" id='male'> Male
+                                        </div>
+                                        <div class="col">
+                                            <input type="radio" name="radio" id='female'> Female
+                                        </div> -->
+                                            {{form2.gender}}
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="row mt-5 ">
+                    <div class="container bg-white border border-info">
+                        <h4 class="font-weight-bold">Contact Office/Personal</h4>
+                        <p class="ml-2"> Update Your Contact Informations</p>
+
+                        <hr>
+                        <div class="row mb-5">
+                            <div class="col-sm-12 col-md-6 col-lg-6">
+
+                                <div class="row">
+                                    <div class=" col-sm-12 col-lg-4">
+                                        <label for="" class="mt-2"> Mobile</label>
+
+                                    </div>
+                                    <div class="col-sm-12 col-lg-8">
+                                        {{form1.mobile}}
+
+                                    </div>
+
+                                </div>
+                                <div class="row mt-5">
+                                    <div class="col-sm-12 col-lg-4">
+                                        <label for="" class=""> City</label>
+
+                                    </div>
+                                    <div class="col-sm-12 col-lg-8">
+
+                                        {{form1.city}}
+
+                                    </div>
+
+                                </div>
+                                <div class="row mt-5">
+                                    <div class="col-sm-12 col-lg-4">
+                                        <label for="" class=""> Pincode</label>
+
+                                    </div>
+                                    <div class="col-sm-12 col-lg-8">
+
+                                        {{form2.pincode}}
+
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+
+                            <div class="col-sm-12 col-md-6 col-lg-6">
+
+                                <div class="row">
+                                    <div class=" col-sm-12 col-lg-3">
+                                        <label for="" class="mt-2">
+                                            Email </label>
+
+                                    </div>
+                                    <div class="col-sm-12 col-lg-9">
+                                        {{form1.email}}
+
+                                    </div>
+
+                                </div>
+                                <div class="row mt-5">
+                                    <div class="col-sm-12 col-lg-3">
+                                        <label for="" class=""> State</label>
+
+                                    </div>
+                                    <div class="col-sm-12 col-lg-9">
+
+                                        {{form2.state}}
+
+                                    </div>
+
+                                </div>
+                                <div class="row mt-5">
+                                    <div class="col-sm-12 col-lg-3">
+                                        <label for="" class=""> Address </label>
+
+                                    </div>
+                                    <div class="col-sm-12 col-lg-9">
+
+                                        {{form2.address}}
+
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <center>
+                    <button type="submit" class="btn btn-outline-info"> Save</button>
+
+                </center>
+
+                <!-- Professional detail   -->
+
+
+            </div>
+
+        </div>
+    </form>
+
+</div>
+
+{% endblock body %}

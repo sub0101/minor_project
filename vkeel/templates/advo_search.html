@@ -1,0 +1,193 @@
+{% extends "base.html" %} {% load static %} {% block body %} {% block quetions %} {% load social_share %}
+<style>
+    @media screen and (max-width: 600px) {
+        .text {
+            font-size: 13px;
+        }
+        .view-profile {
+            font-size: 11px;
+        }
+        .profile-text {
+            font-size: 12px;
+        }
+        .img-center {
+            text-align: center !important;
+        }
+    }
+    
+    @media screen and (min-width: 600px) {
+        .text {
+            font-size: 24px;
+        }
+        .view-profile {
+            font-size: 15px;
+        }
+    }
+</style>
+<title>Advocate Search</title>
+{% endblock quetions %}
+
+<body>
+
+    <div class="container-fluid mt-5  ">
+
+        <div class="row">
+
+
+            <div class="col-lg-3  p-5 mt-2 col-md-12">
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    <div class="container overflow-hidden  border  mw-100  " style="background-color: rgb(201, 209, 199);">
+
+                        <h4 class="text-danger"> Filter Option</h4>
+
+                        <div class="">
+                            <h6 class="mt-4">Law</h6>
+
+                            <select class="mw-100" name="filter_law" id="filter_law" style=" background: transparent;" onchange="this.form.submit()">
+                                <option value="all">Select Law</option>
+                                {% for i in filter_law  %}
+                                <option value= "{{i}}" >{{i}}</option>
+                                {% endfor %}
+
+
+                            </select>
+                        </div>
+
+                        <div class=" mt-4">
+                            <h6>City</h6>
+
+
+                            <select name="city" id="city" onchange="this.form.submit()" class="mw-100">
+                                <option value="None">Select City</option>
+                                {% for i in cities %}
+                                  <option value="{{i}}"> {{i}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class=" mt-4 mb-5">
+                            <label for="male" class="border drinkcard-cc male mt-2 ml-4" style="height: 50px;">
+
+                                <img class="" src=" {% static '/images/male.jpg' %}  "
+                                    style="height: 60px ; width: 60px;" alt=""> <br>male
+                                <input type="radio" name='gender' id='male' value="male" onchange="this.form.submit()"
+                                    hidden='true'> </label>
+                            <label for="female" class="border drinkcard-cc male mt-2 ml-4" style="height: 50px;">
+
+                                <img class="" src=" {% static '/images/female.jpg' %}  "
+                                    style="height: 60px ; width: 60px;" alt=""> <br>Female
+                                <input type="radio" name='gender' id='female' value="female"
+                                    onchange="this.form.submit()" hidden='true'> <i> </i></label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+
+
+            <div class="col-lg-9  mt-2 col-md-12 ">
+                <form autocomplete="off" method='POST' action="/advo_search">
+                    {% csrf_token %}
+                    <div class="autocomplete container">
+                        <input id="myInput" type="text" name="myCountry" placeholder="Search Advocates" style="width: 100%;">
+                    </div>
+                    <input type="submit" value='search' class=''>
+                </form>
+
+                <div class="container mw-100 p-0">
+
+                    {% for i in advocate %}
+
+                    <div class="container mt-5  bg-white p-0 mb-5" style="box-shadow: 2px 40px 50px rgb(39, 38, 38); z-index: 100;">
+                        <div class="border border-danger" style="background-color:rgb(218, 208, 208); color:#d80819">
+                            <span class="d-inline-block">
+                                <h4 class="font-weight-bold text " >Advocate {{i.name}}</h4>
+                                <p>{{abc}} </p>
+                            <p class="text text-dark"> {{i.profile.address}} </p>
+                            </span>
+
+                            <a href="advocate/advocate_profile/{{i.id}} " class="view-profile btn btn-outline-primary mt-1" style="right: 0%; float: right;">View Profile</a>
+                        </div>
+                        <div class="detail border container ml-0 mr-0">
+                            <div class="row " style="background-color :rgb(25,39,52);color: rgb(255, 255, 255);">
+                                <div class="col ">
+
+                                    <h6 class="text-center">Experience</h6>
+                                    <p class="text-center"> {% for key , value in detail.items %} {% if i.email == key %} {{value.experience}} {% endif %} {% endfor %}</p>
+
+                                </div>
+                                <div class="col border">
+                                    <h6 class="text-center">Answers</h6>
+                                    <p class="text-center"> {% for key ,value in detail.items %} {% if i.email == key %} {{value.answer}} {% endif %} {% endfor %}</p>
+
+                                </div>
+                                <div class="col">
+                                    <h6 class="text-center">Rating</h6>
+                                    <p class="text-center"> {% for key , value in detail.items %} {% if i.email == key %} {{value.rate}} {% endif %} {% endfor %}</p>
+                                </div>
+                                <div class="col">
+                                    <h6 class="text-center">Follower</h6>
+                                    <p class="text-center"> {% for key , value in detail.items %} {% if i.email == key %} {{value.follower}} {% endif %} {% endfor %}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class=" container overflow-hidden" style="background-color:rgb(25,39,52)">
+                            <div class="row mt-3">
+                                <div class="col-sm-12 col-lg-3 img-center">
+                                    <p class="text-center">
+                                        <img class=" border bg-dark  " src=" {{i.image.url}} " alt="" style="border-radius: 50%; width: 120px; height: 120px;"> {% for key , value in detail.items %} {% if i.email == key %} {% if value.is_follow %}
+                                        <p class="text-center" style="font-size: 5;"><a class="btn btn-outline-primary  " href="/unfollow/{{i.id}}">unfollow </a> </p>
+
+                                        {% else %} {% if user.is_user %}
+                                        <p class="text-center" style="font-size: 5;"><a class="btn btn-outline-primary  " href="/follow/{{i.id}}">follow</a> </p>{% endif %} {% endif %} {% endif %} {% endfor %}</p>
+
+
+
+                                </div>
+                                <div class="col-sm-12 col-lg-8 img-center mt-2">
+                                    <span class="mt-4 p-0 text-danger font-weight-bolder container profile-text">
+                                        <i style="font-size:13px" class="fa">&#xf0e3;  {% for j in i.profile.area_of_law %}
+                                            <!-- <i class="mr-1" >{{j}} ,  </i>   --> <span class="text-info ml-1 ">{{j}} , </span> {% endfor %} </i><br>
+                                    <i style="font-size:13px " class="fa mt-2">&#xf19c;  {% for j in i.profile.visiting_courts %}
+                                            <span class="text-info ml-1 ">{{j}} , </span>
+                                        {% endfor %}  </i><br>
+                                    <i style="font-size:13px " class=" 	fas fa-location-arrow mt-2"> {% for j in i.profile.service_cities %}
+                                            <span class="text-info ml-1 ">{{j}} , </span>
+                                        {% endfor %} </i><br>
+
+                                    </span>
+                                </div>
+                            </div>
+
+
+
+                            {% if user.is_authenticated %} {% if user.is_user %}
+
+                            <p class="text-center"><a class="btn btn-outline-danger mt-3 mb-3 " href="/advice/{{i.id}}">Instant Advice</a> </p>{% endif %} {% else %}
+                            <p class="text-center"><a class="btn btn-outline-danger mt-3 mb-3 " href="main_signup">Instant Advice</a> </p>
+                            {% endif %}
+                            <div style="color:red">
+                            </div>
+                        </div>
+
+
+                    </div>
+
+
+                    {% endfor %}
+
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+
+    </div>
+</body>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+
+{% endblock body %}

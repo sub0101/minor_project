@@ -1,0 +1,24 @@
+{% extends 'base.html' %} {% load static %} {% block body %} {% block signupcss %}
+<style>
+    .back {
+        position: fixed;
+        height: 100%;
+        background-position: center;
+        background-size: cover;
+        left: 0;
+        right: 0;
+        z-index: -1;
+        /* filter: blur(1.5px); */
+    }
+    
+    .con-signup {
+        z-index: 2;
+    }
+</style>
+
+
+
+{% endblock signupcss %} {% endblock body %} {% block js %}
+
+<script src='{% static "/js/signup_form_jquery.js" %}'></script>
+{% endblock js %}

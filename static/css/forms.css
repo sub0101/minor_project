@@ -1,0 +1,25 @@
+.form-control1 {
+    width: 100%;
+    background: transparent !important;
+    border: none;
+    border-bottom: 1px solid rgba(13, 221, 100, 0.33);
+    font-size: 15px;
+}
+
+input:focus {
+    outline: 0;
+    background-color: rgb(255, 255, 255);
+    box-shadow: none !important;
+    border-bottom-color: rgb(7, 114, 207);
+}
+
+.con-signup {
+    max-width: 338px;
+    padding: 20px;
+}
+
+.con-login {
+    max-width: 400px;
+    padding: 20px;
+
+}

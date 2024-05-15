@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block body %}
+{% load static %}
+{% block css_advice %}
+<link rel="stylesheet" href="{% static '/css/forms.css' %}">
+<link rel="stylesheet" href="{% static '/css/login_modal.css' %}">
+{% endblock css_advice %}
+    <center><div class="con-signup bg-white mt-5" >
+        <h5 id="title">Instant Advice</h5>
+    
+        <div class="body">
+            <form method="POST" target="_blank">
+                {% csrf_token %}
+                <div class="form-group">
+                    <input type="name" class="form-control1" id="name" name="name" placeholder="Full Name" required>
+    
+                </div>
+    
+                <div class="form-group">
+                    <input type="email" class="form-control1" id="email" name="email" value = '{{user.email}}' readonly placeholder="Email ID" required>
+    
+    
+                </div>
+    
+                <div class="form-group">
+                    <input type="text" class="form-control1" id="mobile" name="mobile" placeholder="Phone Number" minlength="10" maxlength="10" required>
+    
+                </div>
+    
+                <button type="submit" class="btn btn-secondary" style="font-family: cursive;">Send</button>
+            </form>
+        </div>
+      
+    </div>
+</center>
+
+
+{% endblock body %}

@@ -1,0 +1,140 @@
+{% extends "base.html" %} {% load static %} {% block body %} {% block answer %}
+<!-- <link rel="stylesheet" href="{% static '/css/profile.css' %}"> -->
+<style>
+    /* .answer-btn:focus
+    {
+        background-color: #ace0f9;
+    } */
+</style>
+{% endblock answer %}
+
+<body>
+    <div class="container-fluid mt-5  ">
+
+        <div class="row mb-4">
+
+
+            <div class="col-lg-9  mt-2 col-md-12  ">
+                <div class="container mw-100 p-0 mb-4">
+
+
+                    <div class="container border mt-3 bg-white mw-100 ">
+
+                        <div class="container-fluid">
+                            <h2 class="text-center text-primary font-weight-bold" style="font-size: 23px;"> {{question.title}}</h2>
+                        </div>
+
+                        <hr>
+                        <div class=" d-flex flex-row ">
+                            <div class=" ">
+                                <img class="rounded-circle" src="{% static '/images/1.png' %}" alt="" style="width: 60px; height: 60px;">
+                            </div>
+                            <div class="">
+                                <p class="ml-3 font-weight-bold" style="color: rgb(60, 116, 65);">
+                                    {{question.user.name}} <br> <span class="text-info"> {{question.title}}</span> </p>
+
+                            </div>
+
+                        </div>
+                        <div class="container">
+                            <p style="color: rgb(101, 5, 226); font-size: 16px; display: block;
+                            white-space:pre-wrap;">{{question.question_description}}</p>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                {% for i in answer %}
+                <div class="mt-1  pt-3 pb-3 " style="background-color: seashell;">
+                    <div class=" d-flex flex-row ">
+                        <div class=" ml-2">
+                            <img class="rounded-circle" src="{{i.user.image.url}} " alt="" style="width: 40px; height: 40px;">
+                        </div>
+                        <div class="">
+                            <p class="ml-3 font-weight-bold" style="color: rgb(60, 116, 65);">
+                                {{i.user.name}} <br> <span class="text-info"> </span> </p>
+
+                        </div>
+
+                    </div>
+                    <div class="container ml-4">
+                    <p class="p-3" style="white-space:pre-wrap;">{{i.reply}} </p> 
+                    </div>
+
+                </div>
+
+                {% endfor %} {% if user.is_advocate  %}
+                <div class="container  p-2 mt-5 mw-100" style="background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);">
+                    <form action="/reply/{{question.id}}"  method="POST">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-lg-1 col-sm-12">
+                                <img src=" {{user.image.url}} " alt="" style="border-radius: 50%; width: 50px; height: 50px;">
+                            </div>
+                            <div class="col-lg-9 col-sm-12">
+                                <textarea cols="30" rows="5" class="mw-100 col " name='reply' id='reply'></textarea>
+                            </div>
+                            <div class="col-lg-2 col-sm-12">
+                                <button type='submit' class="rounded-circle mt-5  answer-btn btn-outline-dark"> <i class="material-icons mt-2" style="font-size:36px">send</i> </button>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+                {% endif %}
+
+            </div>
+
+
+            <div class="col-lg-3 col-md-12 mb-5">
+
+
+                <div class="container border bg-white mt-3 w-100 p-2 " style="height: 600px;">
+                    <h1 class="text-center mt-5 "> Instant Advice </h1>
+                    <center class='mt-5'>
+                        <img class=" border  " src="{% static '/images/appointments.png' %} " alt="" style="border-radius: 50%; width: 130px; height: 130px;">
+
+
+
+                    </center>
+                    <h4 class=" mt-3 mb-5">
+                        Don't you like waiting. Book a Quick Consultation at ₹399/- </h4>
+
+                    <i class="fa fa-check-circle float-left " style="font-size:18px"> </i>
+                    <p class="ml-4">Get a call from experienced lawyer.</p>
+                    <i class="fa fa-check-circle float-left" style="font-size:18px"> </i>
+                    <p class="ml-4"> 30 Minutes Voice Consultation.</p>
+                    <i class="fa fa-check-circle float-left" style="font-size:18px"> </i>
+                    <p class="ml-4"> Verified Lawyer</p>
+
+
+
+                    <!-- <p class="text-center mt-4"><a class="btn btn-outline-primary " href=""> click</a> </p> -->
+
+                </div>
+                <!-- <div class="container border bg-white mt-3 w-100 p-2 " style="height: 500px;">
+                    <h1 class="text-center mt-5 "> Ask Quetions </h1>
+                    <center class='mt-5'>
+                        <img class=" border  " src="{% static '/images/questions.png' %} " alt="" style="border-radius: 50%; width: 100px; height: 100px;">
+
+
+                    </center>
+                    <h4 class="font-weight-bold mt-3 mb-5">
+                        Raise a question to get suggestions from the Lawyers.</h4>
+                    <i class="fa fa-check-circle float-left" style="font-size:18px"> </i>
+                    <p class="ml-4"> Verified Lawyer</p>
+
+
+                    <p class="text-center mt-4"><a class="btn btn-outline-primary " href=""> click</a> </p>
+                </div> -->
+            </div>
+        </div>
+
+    </div>
+
+</body>
+
+{% endblock body %}

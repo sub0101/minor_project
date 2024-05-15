@@ -1,0 +1,93 @@
+{% extends 'base.html' %} {% load static %} {% block body %} {% block usersignupcss %} {% load socialaccount %}
+<style>
+    .back {
+        position: fixed;
+        height: 100%;
+        background-position: center;
+        background-size: cover;
+        left: 0;
+        right: 0;
+        z-index: -1;
+    }
+    
+    .con-signup {
+        z-index: 2;
+    }
+</style>
+<title>User Signup</title>
+
+<link rel="stylesheet" href="{% static '/css/forms.css' %}"> {% endblock usersignupcss %}
+
+<div class="container con-signup mt-2">
+    <div class="heading text-center font-weight-bold text-success mb-2 ml-3">
+        <img src="{% static '/images/logo-short.png' %}" style="width: 46px; margin-top:-10px ;" alt="">
+        <h5 class="font-weight-bold mt-2" style="margin-left: -10px; font-family: Vast Shadow; "> Sign Up As User
+        </h5>
+    </div>
+
+    <form action="user_signup" class=" p-3 border " name="signup-form" style="background-color: rgb(255, 255, 255);" method="POST">
+        {% csrf_token %}
+        <div class="row mt-4 ">
+            <div class="col">
+
+                {{form.name}}
+            </div>
+        </div>
+        <div class="row mt-4 ">
+            <div class="col">
+                {{ form.email }}
+            </div>
+
+        </div>
+        <div class="row mt-4 ">
+            <div class="col">
+                {{ form.mobile }}
+            </div>
+
+        </div>
+
+        <div class="row mt-4 ">
+            <div class="col">
+                {{form.city}}
+            </div>
+        </div>
+        <div class="row mt-4 ">
+            <div class="col">
+                {{form.password1}}
+            </div>
+
+        </div>
+        <div class="row mt-4 ">
+            <div class="col">
+                {{form.password2}}
+
+            </div>
+        </div>
+
+        <button type="submit" class="btn   btn-outline-dark w-100 mt-4"> Sign in</button>
+        <center>OR</center>
+        <a href="{% provider_login_url 'google' %}">
+            <p href="" class="btn btn-block btn-outline-info"> <i class="fab fa-google"></i>   Login via Google</p>
+        </a>
+        <div class="status text-danger text-right"></div>
+        <p class="text-danger bg-info">
+            {{form.errors}}
+        </p>
+    </form>
+
+    {{form2.errors}}
+    <div class="container con-signup">
+        <span class="text-white"> Already have a account? </span> <span> <a href="/login"
+                class="text-danger font-weight-bold"> LOGIN
+                HERE.!</a></span>
+
+    </div>
+
+
+</div>
+
+
+{% endblock body %} {% block js %}
+
+<script src='{% static "/js/signup_form_jquery.js" %}'></script>
+{% endblock js %}

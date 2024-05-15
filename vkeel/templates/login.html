@@ -1,0 +1,104 @@
+<html lang="en">
+
+<head>
+    {% load static %} {% load socialaccount %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href='https://fonts.googleapis.com/css?family=Vast Shadow' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Monoton' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=IM Fell Great Primer SC' rel='stylesheet'>
+    <link rel="stylesheet" href="{% static '/css/forms.css' %}">
+    <link rel="stylesheet" href="{% static '/css/login_modal.css' %}">
+    <style>
+        body {
+            background-image: linear-gradient(to right, #fff1eb 0%, #ace0f9 100%);
+            background-position: center;
+            background-size: cover;
+        }
+    </style>
+
+</head>
+
+<body class="p-3">
+
+
+    <!-- Modal HTML -->
+    {% if messages %}
+    <ul>
+        {% for message in messages %}
+        <li>
+
+            <div class="alert alert-danger" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+                    ×</button>
+                <p> <b> User Not Found</b> {{message}} </p>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+
+    {% endif %}
+
+    <div class="container con-login border  bg-white " style="margin-top:80px">
+
+
+        <div class="container p-0 con-login mt-1 ">
+            <div class="heading text-center font-weight-bold text-danger mb-3">
+                <i class='fas fa-user-alt'></i>
+                <h3 class="font-weight-bold" style="font-family: IM Fell Great Primer SC;"> Log in</h3>
+            </div>
+
+            <form action="login" class="  bg-white" name="signup-form" method="post">
+                {% csrf_token %}
+                <div class="row mt-4 ">
+                    <div class="col">
+                        <input type="email" class="form-control1 w-100 login_input" id="login_email" name="email" autocomplete="off" placeholder="Email">
+                        <!-- <label class="" id="login_email_label" for="login_email"> Email</label> -->
+                    </div>
+                </div>
+
+
+                <div class="row mt-4 ">
+                    <div class="col">
+                        <input type="password" class="form-control1 mw-100 login_input" id="login_password" placeholder="Password" name="password" autocomplete="off">
+                        <!-- <label class="" id="login_password_label" for="login_password"> Password</label> -->
+                    </div>
+                </div>
+
+                <center>
+                    <!-- <a class="btn btn-outline-info btn-rounded align-middle text-center my-4 waves-effect "  onclick="validateForm()">Login</a> -->
+                    <button type="submit" class="btn btn-outline-danger btn-rounded align-middle text-center my-4 waves-effect"> login
+                    </button>
+                </center>
+
+                <div class="status text-danger text-right"> <span class=""> If not Adocate </span>
+                    <a href="{% provider_login_url 'google' %}">
+                        <p href="" class="btn btn-block btn-outline-info"> <i class="fab fa-google"></i>   Login via Google</p>
+                    </a>
+                </div>
+            </form>
+            <span> Do not have an account?</span> <span> <a href="main_signup" class=" "  style="color: blue;"> create
+                    account.!</a></span>
+        </div>
+
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+    </script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+    </script>
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script src='{% static "/js/login_form_jquery.js" %}'></script>
+
+
+
+</body>
+
+</html>

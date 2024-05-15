@@ -1,0 +1,66 @@
+.circular--square {
+    border-top-left-radius: 50% 50%;
+    border-top-right-radius: 50% 50%;
+    border-bottom-right-radius: 50% 50%;
+    border-bottom-left-radius: 50% 50%;
+    margin: auto;
+    display: block;
+    height: auto;
+    max-width: 100%;
+    filter: grayscale(100%);
+}
+
+.form-control1 {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(13, 221, 100, 0.33);
+    border-radius: 0;
+    width: 100%;
+}
+
+.text-area {
+    opacity: 0;
+    height: 20px;
+    position: absolute;
+    background: red;
+    cursor: pointer;
+    z-index: 99999;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.circular--square:hover {
+    filter: none;
+}
+
+.form-div {
+    border: none;
+    border-bottom: 1px solid rgba(124, 118, 118, 0.33);
+}
+
+input {
+    border: none;
+    border-bottom: 1px solid rgba(124, 118, 118, 0.33);
+}
+
+p {
+    color: rgb(199, 183, 183);
+}
+
+.b {
+    background: url("{% static '/images/signupback.jpg' %}");
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    background-position: center;
+    background-size: cover;
+    left: 0;
+    right: 0;
+    z-index: -1;
+    filter: blur(1px);
+}
+
+.container-fluid {
+    z-index: 2;
+}

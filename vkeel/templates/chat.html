@@ -1,0 +1,108 @@
+ {% include "base.html" %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        .card {
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            max-width: 300px;
+            margin: auto;
+            text-align: center;
+            font-family: arial;
+        }
+        
+        .title {
+            color: grey;
+            font-size: 18px;
+        }
+        
+        button {
+            border: none;
+            outline: 0;
+            display: inline-block;
+            padding: 8px;
+            color: white;
+            background-color: #000;
+            text-align: center;
+            cursor: pointer;
+            width: 100%;
+            font-size: 18px;
+        }
+        
+        a {
+            text-decoration: none;
+            /* font-size: 22px; */
+            color: black;
+        }
+        
+        button:hover,
+        a:hover {
+            opacity: 0.7;
+        }
+    </style>
+</head>
+
+<body class="">
+    <h2 style="text-align:center">User Profile Card</h2>
+
+    {% if request.user.is_user %}
+    <div class="row">
+        {% for i in users %}
+        <div class=" col-lg-3 col-xl-3 col-sm-6 col-md-4 col-xs-6 mt-3">
+            <div class="card ">
+                <img src="{{i.chat_user.image.url}}" alt="John" style="width:100%">
+                <h1>{{i.chat_user.name}}</h1>
+                <p class="title">Advocate</p>
+                <p class="text-bold">{{i.chat_user.city}}</p>
+                <div style="margin: 24px 0;">
+                    <a href="#"><i class="fa fa-dribbble"></i></a>
+                    <a href="#"><i class="fa fa-twitter"></i></a>
+                    <a href="#"><i class="fa fa-linkedin"></i></a>
+                    <a href="#"><i class="fa fa-facebook"></i></a>
+                </div>
+                <a href="/advocate/advocate_profile/{{i.chat_user.id}}  " class="btn btn-outline-info ">View Profile</a>
+                <a href="/chat/{{i.chat_user.id}}  " class="btn btn-outline-dark ">Make Chat</a>
+
+            </div>
+
+
+        </div>
+        {% endfor %}
+    </div>
+
+    {% endif %} {% if request.user.is_advocate %}
+
+    <div class="row">
+        {% for i in users %}
+        <div class=" col-lg-3 col-xl-3 col-sm-6 col-md-4 col-xs-6 mt-3">
+            <div class="card ">
+                <img src="{{i.chat_user2.image.url}}" alt="John" style="width:100%">
+                <h1>{{i.chat_user2.name}}</h1>
+                {% if user.is_user%}
+                <p class="title">Advocate</p>{% else %}
+                <p class="title">User</p> {% endif %}
+                <p class="text-bold">{{i.chat_user2.city}}</p>
+                <div style="margin: 24px 0;">
+                    <a href="#"><i class="fa fa-dribbble"></i></a>
+                    <a href="#"><i class="fa fa-twitter"></i></a>
+                    <a href="#"><i class="fa fa-linkedin"></i></a>
+                    <a href="#"><i class="fa fa-facebook"></i></a>
+                </div>
+                <!-- <a href="/advocate/advocate_profile/{{i.chat_user.id}}  " class="btn btn-outline-info ">View Profile</a> -->
+                <a href="/chat/{{i.chat_user2.id}}  " class="btn btn-outline-dark ">Make Chat</a>
+
+            </div>
+
+
+        </div>
+        {% endfor %}
+    </div>
+
+    {% endif %}
+
+
+</body>
+
+</html>

@@ -1,0 +1,168 @@
+{% extends "base.html" %} {% load static %} {% block body %} {% block quetions %}
+<!-- <link rel="stylesheet" href="{% static '/css/profile.css' %}"> -->
+<style>
+    /* body {
+        background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
+        background-image: linear-gradient(to right, #fff1eb 0%, #ace0f9 100%);
+    } */
+    /* .answer-btn:focus
+    {
+        background-color: #ace0f9;
+    } */
+</style>
+<title>Questions</title>
+<script>
+    function selectoption() {
+        console.log("dddssd");
+        document.getElementsById('form1').submit();
+    }
+</script>
+
+{% endblock quetions %}
+
+<body>
+
+    <div class="container-fluid mt-5  ">
+
+        <div class="row">
+            <div class="col-lg-2  p-3 mt-2 col-md-12">
+                <form action="questions" method="POST" id='form1'>
+                    {% csrf_token %}
+                    <div class="container overflow-hidden  border bg-white mw-100 " style="height: 150px;">
+                        <h4 class="text-danger"> Filter Option</h4>
+
+                        <h6 class="mt-4">Law</h6>
+
+                        <select class="mw-100" name="filter" id="" style=" background: transparent;" onchange="this.form.submit()">
+                        <option value="">---------</option>
+                        <option value="all">all</option>
+                        <!-- <option value="Property Law">Property Law</option>
+                        <option value="Enviromental Law">Enviromental Law</option>
+                        <option value="Civil Law"> Civil Law</option>
+                        <option value="Cyber Crime Law">Cyber Crime Law</option>
+                         -->
+                         {% for i in filter_law %}
+                         <option value= "{{i}}" > {{i}} </option>
+                         {% endfor %}
+
+
+                    </select>
+                    </div>
+                </form>
+
+            </div>
+
+            <div class="col-lg-7  mt-2 col-md-12 ">
+                <div class="container mw-100 p-0">
+
+
+                    {% for i in questions %}
+
+                    <div class="container border mt-3 bg-white mw-100 " style=" box-shadow: 2px 40px 50px rgb(78, 70, 70); z-index: 100;">
+                        <div class=" d-flex flex-row ">
+                            <div class=" ">
+                                <img class="rounded-circle" src=" {{i.user.image.url}} " alt="" style="width: 60px; height: 60px;">
+                            </div>
+                            <div class="">
+                                <p class="ml-3 font-weight-bold" style="color: rgb(60, 116, 65);"> {{i.user.name}} </p>
+                                <h5 class="font-weight-bold ml-3 text-danger" style="top: 0%; "> {{i.title}}</h5>
+                            </div>
+                        </div>
+                        <hr>
+
+                        <div class="container mt-3 border ">
+                            <span style="white-space:pre-wrap;">
+                                {{i.question_description}}  </span>
+                         
+
+                        </div>
+
+                        <P class="d-inline text-muted mr-2">{{i.date_posted.date}}</P>
+                        <p class="  text-center d-inline">
+                            <p class="bg-white d-inline text-info "> {{i.area_of_law}} </p>
+
+
+
+                            <a class="d-inline ml-4" href='questions/answer/{{i.id}}'> <i class="material-icons" style="font-size:20px">reply_all</i> Answer</a>
+
+                        </p>
+
+                    </div>
+                    {% if user.is_advocate %} {% endif %} {% endfor %}
+                </div>
+
+
+            </div>
+
+            <div class="col-lg-3 col-md-12 mb-5">
+
+
+                <div class="container border bg-white mt-3 w-100 p-2 " style="height: 600px;">
+                    <h1 class="text-center mt-5 "> Instant Advice </h1>
+                    <center class='mt-5'>
+                        <img class=" border  " src="{% static '/images/appointments.png' %} " alt="" style="border-radius: 50%; width: 130px; height: 130px;">
+
+
+
+                    </center>
+                    <h4 class=" mt-3 mb-5">
+                        Don't you like waiting. Book a Quick Consultation at ₹399/- </h4>
+
+                    <i class="fa fa-check-circle float-left " style="font-size:18px"> </i>
+                    <p class="ml-4">Get a call from experienced lawyer.</p>
+                    <i class="fa fa-check-circle float-left" style="font-size:18px"> </i>
+                    <p class="ml-4"> 30 Minutes Voice Consultation.</p>
+                    <i class="fa fa-check-circle float-left" style="font-size:18px"> </i>
+                    <p class="ml-4"> Verified Lawyer</p>
+
+
+
+                    <!-- <p class="text-center mt-4"><a class="btn btn-outline-primary " href="/instantadvice"> click</a> </p> -->
+
+                </div>
+                <div class="container border bg-white mt-3 w-100 p-2 " style="height: 500px;">
+                    <h1 class="text-center mt-5 "> Ask Quetions </h1>
+                    <center class='mt-5'>
+                        <img class=" border  " src="{% static '/images/questions.png' %} " alt="" style="border-radius: 50%; width: 100px; height: 100px;">
+
+
+                    </center>
+                    <h4 class="font-weight-bold mt-3 mb-5">
+                        Raise a question to get suggestions from the Lawyers.</h4>
+                    <i class="fa fa-check-circle float-left" style="font-size:18px"> </i>
+                    <p class="ml-4"> Verified Lawyer</p>
+
+
+                    <!-- <p class="text-center mt-4"><a class="btn btn-outline-primary " href=""> click</a> </p> -->
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+</body>
+
+{% endblock body %} {% block scriptquestion %}
+<script type="text/javascript">
+    $(document).on('submit', 'form', function(e) {
+        e.preventDefault();
+
+        $.ajax({
+
+            type: 'POST',
+            url: '/questions',
+            data: {
+                name: $('#search').val(),
+                csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+            },
+            success: function() {
+                alert('ceated');
+
+            }
+        });
+    });
+</script>
+
+{% endblock scriptquestion %}

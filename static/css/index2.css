@@ -1,0 +1,137 @@
+*{
+  padding: 0;
+  margin: 0;
+}
+
+.btn a{
+  text-decoration: none;
+}
+
+.top {
+  margin: 35px 20px 0px 20px;
+}
+
+/* .container {
+  margin: 40px 20px 0px 65px;
+  } */
+  
+.bottom {
+  margin: 35px 0px 0px 0px;
+  }
+
+/* Big block button */
+.big h1 {
+  margin: 40px 0px 40px 0px;
+  text-align: center;
+  font-style: italic;
+  font-weight: bold;
+  color:whitesmoke;
+      }
+
+/* Slideshow container */
+.slideshow-container {
+  position: relative;
+  background: #f1f1f1f1;
+}
+
+/* Slides */
+.mySlides {
+  display: none;
+  padding: 80px;
+  text-align: center;
+}
+
+.card:hover {
+  box-shadow: 5px 10px 40px rgb(7, 5, 5);
+  z-index: 100;
+
+}
+
+/* Next & previous buttons */
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  margin-top: -30px;
+  padding: 16px;
+  color: whitesmoke;
+  font-weight: bold;
+  font-size: 20px;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+}
+
+/* Position the "next button" to the right */
+.next {
+  position: absolute;
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover, .next:hover {
+  background-color: rgba(0,0,0,0.8);
+  color: white;
+}
+
+/* The dot/bullet/indicator container */
+.dot-container {
+  text-align: center;
+  padding: 20px;
+  background: #ddd;
+}
+
+/* The dots/bullets/indicators */
+.dot {
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+/* Add a background color to the active dot/circle */
+.active, .dot:hover {
+  background-color: #717171;
+}
+
+/* Add an italic font style to all quotes */
+q {font-style: italic;}
+
+/* Add a blue color to the author */
+.author {color: cornflowerblue;}
+
+
+.jumbotron{
+margin-top: 3rem;
+height: 30rem;
+color: whitesmoke;
+background-color: black;
+overflow: hidden;
+position: relative;
+}
+
+.foot{
+background-color: gray;
+}
+
+.heading h1{
+text-align: center;
+}
+
+
+
+
+.card-up {
+  background: #34e89e;
+  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #0f3443, #34e89e);
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #0f3443, #34e89e);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}

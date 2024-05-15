@@ -1,0 +1,53 @@
+{% extends "base.html" %} {% load static %} {% block body %} {% block aboutcss %}
+<link rel="stylesheet" href="{% static '/css/about.css' %}"> {% endblock aboutcss %}
+<title>About Us</title>
+
+<body>
+    <div class="imgcard">
+        <div class="card mb-3">
+            <img src="{% static '/images/aboutpage.jpeg' %}" class="card-img-top " alt="...">
+            <div class="card-body">
+                <h2 class="card-title" style="font-family:comic sans ms;">About Us...</h2>
+                <p class="card-text">
+                    <p style="font-family:comic sans ms;" color: #39603D; ">AdvoLegal is a leading online platform build
+                    with love
+                    by
+                    Hero5 Connections Pvt. Ltd. that helps you find the best Lawyers in your city because all your
+                    legal
+                    requirements deserve the best so that you don’t regret later. Whether you are drafting your
+                    will, buying/selling real-estate, getting a divorce or any other legal need-Hiring the best
+                    Lawyer can
+                    be
+                    intimidating. We want to make your legal experience less stressful by giving you a bunch of
+                    choices so
+                    that
+                    you can choose the best and leave
+                    the rest to destiny. Whether you are looking for a Lawyer or you are a Lawyer, AdvoLegal is a
+                    right
+                    place to
+                    connect. </p>
+                <h5 class="font-weight-bolder " style="font-family: Bree Serif; ">Key Features</h5>
+                <div style="font-family:comic sans ms ; color: #39603D; ">
+                    <li>We have detailed profiles for every lawyer.</li>
+                    <li>You can raise a free query and get legal advice by top lawyers of India.</li>
+                    <li>Search for lawyers nearby your location and as per your law requirements.</li>
+                    <li>Have a meeting consultation with experience Lawyer at his/her office.</li>
+                    <li>Stay updated with all the law news through our blog.</li>
+                </div>
+                </p>
+            </div>
+        </div>
+
+    </div>
+    <footer class="foot w-100 bg-light " style="position: fixed; bottom: 0%; ">
+        <div class="copy ">
+            <div class="container ">
+                <p class="float-right "><a href="# ">Back to top</a></p>
+                <p>© 2020-2021 AdvoLegal Company, Inc. · <a href="# ">Privacy</a> · <a href="# ">Terms</a></p>
+            </div>
+        </div>
+
+    </footer>
+</body>
+
+{% endblock body %}
